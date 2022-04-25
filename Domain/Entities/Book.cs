@@ -9,4 +9,6 @@ public class Book
     public string? Name { get; set; }
 
     public Isbn? Isbn { get; set; }
+
+    public IEnumerable<Rental> Rentals { get; set; } = null!;
 }

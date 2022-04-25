@@ -27,10 +27,10 @@ public class GetAllBooksQueryHandler : IRequestHandler<GetAllBooksQuery, GetAllB
 
     public async Task<GetAllBooksVm> Handle(GetAllBooksQuery request, CancellationToken cancellationToken)
     {
-        var books = await _applicationContext.Books.AsNoTracking().ProjectTo<BookDto>(_mapper.ConfigurationProvider)
+        var books = await _applicationContext.Books.AsNoTracking().ProjectTo<BriefBookDto>(_mapper.ConfigurationProvider)
             .ToListAsync(cancellationToken: cancellationToken);
 
-        _logger.Debug("Found {Count} books", books.Count);
+        _logger.Debug("Found {} books", books.Count);
 
         return new GetAllBooksVm
         {

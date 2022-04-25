@@ -8,7 +8,8 @@ namespace Infrastructure.Persistence;
 public class ApplicationContext : DbContext, IApplicationContext
 {
     public DbSet<Book> Books { get; set; } = null!;
-    
+    public DbSet<Rental> Rentals { get; set; } = null!;
+
     public async Task<int> SaveAsync(CancellationToken cancellationToken)
     {
         return await base.SaveChangesAsync(cancellationToken);

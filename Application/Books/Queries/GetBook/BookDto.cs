@@ -2,14 +2,14 @@ using Application.Common.Mappings;
 using AutoMapper;
 using Domain.Entities;
 
-namespace Application.Books.Queries.GetAllBooks;
+namespace Application.Books.Queries.GetBook;
 
 public class BookDto : IMapFrom<Book>
 {
-    public string? Id { get; set; }
+    public Guid Id { get; set; }
     
-    public string? Name { get; set; }
-
+    public string Name { get; set; }
+    
     public string? Isbn { get; set; }
 
     public void Mapping(Profile profile)

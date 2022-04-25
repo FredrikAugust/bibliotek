@@ -2,5 +2,5 @@ namespace Application.Books.Queries.GetAllBooks;
 
 public class GetAllBooksVm
 {
-    public IEnumerable<BookDto> Books { get; set; }
+    public IEnumerable<BriefBookDto> Books { get; set; } = null!;
 }
