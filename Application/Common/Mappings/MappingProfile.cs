@@ -1,8 +1,10 @@
 using System.Reflection;
+using Application.Common.Mapping;
 using AutoMapper;
 
-namespace Application.Common.Mapping;
+namespace Application.Common.Mappings;
 
+// ReSharper disable once UnusedType.Global
 public class MappingProfile : Profile
 {
     public MappingProfile()
