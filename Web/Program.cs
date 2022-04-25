@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Identity.Web;
 using Web.Extensions;
 using Application;
+using Infrastructure;
 using Infrastructure.Logging;
 using Serilog;
 using Serilog.Debugging;
@@ -26,6 +27,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerExtensions(builder.Configuration);
 builder.Services.AddApplication();
+builder.Services.AddInfrastructure();
 
 var app = builder.Build();
 

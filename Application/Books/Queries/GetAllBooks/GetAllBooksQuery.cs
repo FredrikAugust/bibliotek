@@ -1,46 +1,40 @@
+using Application.Common.Interfaces;
 using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using Domain.Entities;
-using Domain.ValueObjects;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Serilog;
 
 namespace Application.Books.Queries.GetAllBooks;
 
-public class GetAllBooksQuery  : IRequest<IEnumerable<BookDto>>
+public class GetAllBooksQuery : IRequest<GetAllBooksVm>
 {
 }
 
-public class GetAllBooksQueryHandler : IRequestHandler<GetAllBooksQuery, IEnumerable<BookDto>>
+public class GetAllBooksQueryHandler : IRequestHandler<GetAllBooksQuery, GetAllBooksVm>
 {
     private readonly IMapper _mapper;
     private readonly ILogger _logger;
-    
-    public GetAllBooksQueryHandler(IMapper mapper, ILogger logger)
+    private readonly IApplicationContext _applicationContext;
+
+    public GetAllBooksQueryHandler(IMapper mapper, ILogger logger, IApplicationContext applicationContext)
     {
         _mapper = mapper;
         _logger = logger;
+        _applicationContext = applicationContext;
     }
-    
-    public Task<IEnumerable<BookDto>> Handle(GetAllBooksQuery request, CancellationToken cancellationToken)
-    {
-        var books = new List<Book>
-        {
-            new()
-            {
-                Id = Guid.NewGuid(),
-                Isbn = new Isbn("123"),
-                Name = "How to be an Elf"
-            },
-            new()
-            {
-                Id = Guid.NewGuid(),
-                Isbn = new Isbn("456"),
-                Name = "How to stop being an Elf"
-            }
-        };
-        
-        _logger.Debug("Found {Count} books", books.Count);       
 
-        return Task.FromResult(_mapper.Map<IList<Book>, IEnumerable<BookDto>>(books));
+    public async Task<GetAllBooksVm> Handle(GetAllBooksQuery request, CancellationToken cancellationToken)
+    {
+        var books = await _applicationContext.Books.AsNoTracking().ProjectTo<BookDto>(_mapper.ConfigurationProvider)
+            .ToListAsync(cancellationToken: cancellationToken);
+
+        _logger.Debug("Found {Count} books", books.Count);
+
+        return new GetAllBooksVm
+        {
+            Books = books
+        };
     }
 }

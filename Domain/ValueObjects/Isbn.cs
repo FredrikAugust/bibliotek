@@ -4,6 +4,10 @@ namespace Domain.ValueObjects;
 
 public class Isbn : ValueObject
 {
+    public Isbn()
+    {
+    }
+
     public Isbn(string rawValue)
     {
         RawValue = rawValue;
