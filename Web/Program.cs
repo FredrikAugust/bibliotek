@@ -2,8 +2,20 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Identity.Web;
 using Web.Extensions;
 using Application;
+using Infrastructure.Logging;
+using Serilog;
+using Serilog.Debugging;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Add Serilog
+Log.Logger = Logger.Create(builder.Configuration["Serilog:Elastic:ConnectionString"]);
+
+builder.Host.UseSerilog(Log.Logger);
+
+SelfLog.Enable(Console.Error);
+
+builder.Services.AddSingleton(Log.Logger);
 
 // Add services to the container.
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -30,6 +42,8 @@ if (app.Environment.IsDevelopment())
     });
 }
 
+app.UseSerilogRequestLogging();
+
 app.UseHttpsRedirection();
 
 app.UseAuthentication();
@@ -37,4 +51,16 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-app.Run();
+try
+{
+    Log.Information("Starting web host");
+    app.Run();
+}
+catch (Exception ex)
+{
+    Log.Fatal(ex, "Host terminated unexpectedly");
+}
+finally
+{
+    Log.CloseAndFlush();
+}
