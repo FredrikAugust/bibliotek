@@ -33,14 +33,14 @@ public class GetBookQueryHandler : IRequestHandler<GetBookQuery, BookWithRentalV
 
         if (book == null)
         {
-            _logger.Information("Requested non-existent book with ID {}", request.BookId);
+            _logger.Information("Requested non-existent book with ID {@BookId}", request.BookId);
             return null;
         }
 
         var rentals = await _applicationDbContext.Rentals.Where(rental => rental.BookId == book.Id)
             .ProjectTo<BriefRentalDto>(_mapper.ConfigurationProvider).ToListAsync(cancellationToken: cancellationToken);
         
-        _logger.Debug("Found book {} with active rentals {@Rentals}", book, rentals.Where(dto => dto.Active));
+        _logger.Debug("Found book {@Book} with active rentals {@Rentals}", book, rentals.Where(dto => dto.Active));
 
         return new BookWithRentalVm
         {

@@ -46,7 +46,7 @@ public class CreateRentalCommandHandler : IRequestHandler<CreateRentalCommand, C
 
         await _applicationDbContext.SaveAsync(cancellationToken);
         
-        _logger.Information("Book {} is now being lent to {@Rental}", book.Id, rental.UserId);
+        _logger.Information("Book {@Id} is now being lent to {@Rental}", book.Id, rental.UserId);
 
         return _mapper.Map<CreateRentalVm>(rental);
     }

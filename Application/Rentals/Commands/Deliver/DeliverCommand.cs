@@ -34,7 +34,7 @@ public class DeliverCommandHandler : IRequestHandler<DeliverCommand, bool>
 
         if (rental.End != null)
         {
-            _logger.Debug("Attempted to hand in already delivered book {}. Rental id: {}", rental.BookId, rental.Id);
+            _logger.Debug("Attempted to hand in already delivered book {@BookId}. Rental id: {@RentalId}", rental.BookId, rental.Id);
             return false;
         }
         
@@ -42,7 +42,7 @@ public class DeliverCommandHandler : IRequestHandler<DeliverCommand, bool>
 
         await _applicationDbContext.SaveAsync(cancellationToken);
         
-        _logger.Information("Book {} was handed in", rental.BookId);
+        _logger.Information("Book {@BookId} was handed in", rental.BookId);
 
         return true;
     }

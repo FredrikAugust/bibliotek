@@ -42,7 +42,7 @@ public class CreateBookCommandHandler : IRequestHandler<CreateBookCommand, Brief
 
         await _applicationDbContext.SaveAsync(cancellationToken);
         
-        _logger.Information("Created new book {}", book.Id);
+        _logger.Information("Created new book {@Id}", book.Id);
 
         return _mapper.Map<BriefBookDto>(result.Entity);
     }
