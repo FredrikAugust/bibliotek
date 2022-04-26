@@ -26,8 +26,8 @@ public class GetAllBooksQueryHandler : IRequestHandler<GetAllBooksQuery, GetAllB
 
     public async Task<GetAllBooksVm> Handle(GetAllBooksQuery request, CancellationToken cancellationToken)
     {
-        var books = await _applicationDbContext.Books.AsNoTracking().ProjectTo<BriefBookDto>(_mapper.ConfigurationProvider)
-            .ToListAsync(cancellationToken: cancellationToken);
+        var books = await _applicationDbContext.Books.Include(book => book.Rentals).AsNoTracking().ProjectTo<BriefBookDto>(_mapper.ConfigurationProvider)
+            .ToListAsync(cancellationToken);
 
         _logger.Debug("Found {Count} books", books.Count);
 
