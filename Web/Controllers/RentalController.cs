@@ -1,5 +1,6 @@
 using Application.Rentals.Commands.CreateRental;
 using Application.Rentals.Commands.Deliver;
+using Application.Rentals.Queries.Active;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Web.Common;
@@ -30,5 +31,13 @@ public class RentalController : ApiControllerBase
         if (result) return Ok();
 
         return BadRequest();
+    }
+
+    [HttpGet]
+    public async Task<ActionResult<IEnumerable<ActiveRentalDto>>> Active()
+    {
+        var result = await Mediator.Send(new ActiveRentalsQuery());
+
+        return Ok(result);
     }
 }
