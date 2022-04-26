@@ -14,20 +14,20 @@ public class DeliverCommandHandler : IRequestHandler<DeliverCommand, bool>
 {
     private readonly IMapper _mapper;
     private readonly ILogger _logger;
-    private readonly IApplicationContext _applicationContext;
+    private readonly IApplicationDbContext _applicationDbContext;
     private readonly ICurrentUserService _currentUserService;
 
-    public DeliverCommandHandler(IMapper mapper, ILogger logger, IApplicationContext applicationContext, ICurrentUserService currentUserService)
+    public DeliverCommandHandler(IMapper mapper, ILogger logger, IApplicationDbContext applicationDbContext, ICurrentUserService currentUserService)
     {
         _mapper = mapper;
         _logger = logger;
-        _applicationContext = applicationContext;
+        _applicationDbContext = applicationDbContext;
         _currentUserService = currentUserService;
     }
 
     public async Task<bool> Handle(DeliverCommand request, CancellationToken cancellationToken)
     {
-        var rental = await _applicationContext.Rentals.FindAsync(new object?[] { request.RentalId }, cancellationToken: cancellationToken);
+        var rental = await _applicationDbContext.Rentals.FindAsync(new object?[] { request.RentalId }, cancellationToken: cancellationToken);
         
         if (rental == null || rental.UserId != _currentUserService.UserId)
             return false;
@@ -40,7 +40,7 @@ public class DeliverCommandHandler : IRequestHandler<DeliverCommand, bool>
         
         rental.End = DateTime.Now;
 
-        await _applicationContext.SaveAsync(cancellationToken);
+        await _applicationDbContext.SaveAsync(cancellationToken);
         
         _logger.Information("Book {} was handed in", rental.BookId);
 

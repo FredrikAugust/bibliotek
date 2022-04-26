@@ -50,6 +50,10 @@ A partial CQRS approach has been implemented using MediatR, although there is no
 
 EF Core is used for database interaction, and FluentValidation _will_ be used once it's necessary to get some validation up in here.
 
+A Microsoft SQL Server database is used, and is available preconfigured in the docker compose.
+
+You will, however, need to add the connection strings in the `appsettings.json` files for dev and test.
+
 ## Endpoint debugging
 
 For debugging the endpoints, I recommend using Postman. You can configure postman to authenticate using Azure AD and automatically attach tokens to your requests.

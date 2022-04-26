@@ -1,12 +1,13 @@
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.Identity.Web;
-using Web.Extensions;
 using Application;
 using Application.Common.Interfaces;
 using Infrastructure;
 using Infrastructure.Logging;
+using Infrastructure.Persistence;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Identity.Web;
 using Serilog;
 using Serilog.Debugging;
+using Web.Extensions;
 using Web.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -29,11 +30,13 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerExtensions(builder.Configuration);
 builder.Services.AddApplication();
-builder.Services.AddInfrastructure();
+builder.Services.AddInfrastructure(builder.Configuration);
 
 builder.Services.AddSingleton<ICurrentUserService, CurrentUserService>();
 
 var app = builder.Build();
+
+await MigrationHelper.Migrate(app.Services);
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -46,6 +49,8 @@ if (app.Environment.IsDevelopment())
         options.OAuthScopeSeparator(" ");
         options.OAuthUsePkce();
     });
+
+    await ApplicationDbContextSeed.SeedAsync(app.Services);
 }
 
 app.UseSerilogRequestLogging();

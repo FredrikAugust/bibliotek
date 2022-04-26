@@ -1,2 +1,36 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=14eb833e_002Dfbec_002D41b1_002Dab32_002Dd4b0c9875717/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="GetAllTests_ShouldReturnAll #5" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;TestAncestor&gt;
+    &lt;TestId&gt;xUnit::FD1FE46A-EAAC-4CAE-B8E4-1453B2B42622::net6.0::Application.IntegrationTests.Books.Queries.GetAllTests.GetAllTests_ShouldReturnAll&lt;/TestId&gt;
+  &lt;/TestAncestor&gt;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=1e88a3d6_002D6936_002D4d07_002Dad47_002D514e63068570/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="GetAllTests_ShouldReturnAll #4" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;TestAncestor&gt;
+    &lt;TestId&gt;xUnit::FD1FE46A-EAAC-4CAE-B8E4-1453B2B42622::net6.0::Application.IntegrationTests.Books.Queries.GetAllTests.GetAllTests_ShouldReturnAll&lt;/TestId&gt;
+  &lt;/TestAncestor&gt;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=8ba02f09_002De93a_002D459b_002D8a66_002Da417c2892f15/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="GetAllTests_ShouldReturnAll #3" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;TestAncestor&gt;
+    &lt;TestId&gt;xUnit::FD1FE46A-EAAC-4CAE-B8E4-1453B2B42622::net6.0::Application.IntegrationTests.Books.Queries.GetAllTests.GetAllTests_ShouldReturnAll&lt;/TestId&gt;
+  &lt;/TestAncestor&gt;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=d022b454_002D5603_002D45f1_002D8a7e_002D1705847672eb/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="GetAllTests_ShouldReturnAll #6" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;TestAncestor&gt;
+    &lt;TestId&gt;xUnit::FD1FE46A-EAAC-4CAE-B8E4-1453B2B42622::net6.0::Application.IntegrationTests.Books.Queries.GetAllTests&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::FD1FE46A-EAAC-4CAE-B8E4-1453B2B42622::net6.0::Application.IntegrationTests.Books.Queries.GetOneTests&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::FD1FE46A-EAAC-4CAE-B8E4-1453B2B42622::net6.0::Application.IntegrationTests.Books.Queries.CreateBookTests&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::FD1FE46A-EAAC-4CAE-B8E4-1453B2B42622::net6.0::Application.IntegrationTests.Books.Commands.CreateBookTests&lt;/TestId&gt;
+  &lt;/TestAncestor&gt;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=e0190266_002D65e5_002D437b_002Da2e8_002D33cdb740437a/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="GetAllTests_ShouldReturnAll #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;TestAncestor&gt;
+    &lt;TestId&gt;xUnit::FD1FE46A-EAAC-4CAE-B8E4-1453B2B42622::net6.0::Application.IntegrationTests.Books.Queries.GetAllTests.GetAllTests_ShouldReturnAll&lt;/TestId&gt;
+  &lt;/TestAncestor&gt;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=e0f5e114_002Dbc08_002D4262_002D99ee_002Db8600153c143/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="GetAllTests_ShouldReturnAll" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;TestAncestor&gt;
+    &lt;TestId&gt;xUnit::FD1FE46A-EAAC-4CAE-B8E4-1453B2B42622::net6.0::Application.IntegrationTests.Books.Queries.GetAllTests.GetAllTests_ShouldReturnAll&lt;/TestId&gt;
+  &lt;/TestAncestor&gt;
+&lt;/SessionState&gt;</s:String>
+	<s:Boolean x:Key="/Default/UserDictionary/Words/=appsettings/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/UserDictionary/Words/=Zanaris/@EntryIndexedValue">True</s:Boolean></wpf:ResourceDictionary>

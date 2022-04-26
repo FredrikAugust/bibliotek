@@ -24,7 +24,19 @@ services:
       - kibana_volume:/usr/share/kibana/data
     environment:
       ELASTICSEARCH_HOSTS: '["https://elastic:9200"]'
+      
+  mssql:
+    image: mcr.microsoft.com/azure-sql-edge:1.0.5
+    ports:
+      - "1433:1433"
+    volumes:
+      - sql_volume:/var/opt/mssql
+    environment:
+      ACCEPT_EULA: Y
+      MSSQL_PID: Developer
+      MSSQL_SA_PASSWORD: MyP@ssword
 
 volumes:
   log_volume: { }
   kibana_volume: { }
+  sql_volume: { }

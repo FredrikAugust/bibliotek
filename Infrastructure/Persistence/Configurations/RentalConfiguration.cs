@@ -4,11 +4,10 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Infrastructure.Persistence.Configurations;
 
-public class BookConfiguration : IEntityTypeConfiguration<Book>
+public class RentalConfiguration : IEntityTypeConfiguration<Rental>
 {
-    public void Configure(EntityTypeBuilder<Book> builder)
+    public void Configure(EntityTypeBuilder<Rental> builder)
     {
-        builder.OwnsOne(e => e.Isbn).Property(e => e.RawValue).HasColumnName("Isbn");
         builder.Property(e => e.Id).HasConversion<string>();
     }
 }

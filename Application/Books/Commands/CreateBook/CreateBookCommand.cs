@@ -19,13 +19,13 @@ public class CreateBookCommandHandler : IRequestHandler<CreateBookCommand, Brief
 {
     private readonly IMapper _mapper;
     private readonly ILogger _logger;
-    private readonly IApplicationContext _applicationContext;
+    private readonly IApplicationDbContext _applicationDbContext;
 
-    public CreateBookCommandHandler(IMapper mapper, ILogger logger, IApplicationContext applicationContext)
+    public CreateBookCommandHandler(IMapper mapper, ILogger logger, IApplicationDbContext applicationDbContext)
     {
         _mapper = mapper;
         _logger = logger;
-        _applicationContext = applicationContext;
+        _applicationDbContext = applicationDbContext;
     }
 
     public async Task<BriefBookDto?> Handle(CreateBookCommand request, CancellationToken cancellationToken)
@@ -38,9 +38,9 @@ public class CreateBookCommandHandler : IRequestHandler<CreateBookCommand, Brief
             Name = request.Name
         };
 
-        var result = _applicationContext.Books.Add(book);
+        var result = _applicationDbContext.Books.Add(book);
 
-        await _applicationContext.SaveAsync(cancellationToken);
+        await _applicationDbContext.SaveAsync(cancellationToken);
         
         _logger.Information("Created new book {}", book.Id);
 

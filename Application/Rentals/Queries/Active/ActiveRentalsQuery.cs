@@ -15,20 +15,20 @@ public class ActiveRentalsQueryHandler : IRequestHandler<ActiveRentalsQuery, IEn
 {
     private readonly IMapper _mapper;
     private readonly ILogger _logger;
-    private readonly IApplicationContext _applicationContext;
+    private readonly IApplicationDbContext _applicationDbContext;
     private readonly ICurrentUserService _currentUserService;
 
-    public ActiveRentalsQueryHandler(IMapper mapper, ILogger logger, IApplicationContext applicationContext, ICurrentUserService currentUserService)
+    public ActiveRentalsQueryHandler(IMapper mapper, ILogger logger, IApplicationDbContext applicationDbContext, ICurrentUserService currentUserService)
     {
         _mapper = mapper;
         _logger = logger;
-        _applicationContext = applicationContext;
+        _applicationDbContext = applicationDbContext;
         _currentUserService = currentUserService;
     }
 
     public async Task<IEnumerable<ActiveRentalDto>> Handle(ActiveRentalsQuery request, CancellationToken cancellationToken)
     {
-        return await _applicationContext.Rentals.AsNoTracking().Where(rental => rental.UserId == _currentUserService.UserId)
+        return await _applicationDbContext.Rentals.AsNoTracking().Where(rental => rental.UserId == _currentUserService.UserId)
             .Include(rental => rental.Book).ProjectTo<ActiveRentalDto>(_mapper.ConfigurationProvider).ToListAsync(cancellationToken);
     }
 }

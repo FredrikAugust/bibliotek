@@ -5,28 +5,19 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Persistence;
 
-public class ApplicationContext : DbContext, IApplicationContext
+public class ApplicationDbContext : DbContext, IApplicationDbContext
 {
+    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> dbContextOptions) : base(dbContextOptions)
+    {
+    }
+    
     public DbSet<Book> Books { get; set; } = null!;
     public DbSet<Rental> Rentals { get; set; } = null!;
 
-    public async Task<int> SaveAsync(CancellationToken cancellationToken)
+    public async Task<int> SaveAsync(CancellationToken cancellationToken = new())
     {
         return await base.SaveChangesAsync(cancellationToken);
     }
-
-    private string DbPath { get; }
-
-    public ApplicationContext()
-    {
-        const Environment.SpecialFolder folder = Environment.SpecialFolder.LocalApplicationData;
-        var path = Environment.GetFolderPath(folder);
-
-        DbPath = Path.Join(path, "library.db");
-    }
-
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
-        optionsBuilder.UseSqlite($"Data Source={DbPath}");
 
     /**
      * This makes asp.net find configurations in the assembly, so we can define configurations for models in separate files.
@@ -34,5 +25,7 @@ public class ApplicationContext : DbContext, IApplicationContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+        
+        base.OnModelCreating(modelBuilder);
     }
 }

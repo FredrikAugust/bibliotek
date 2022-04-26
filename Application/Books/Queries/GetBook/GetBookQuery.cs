@@ -14,20 +14,20 @@ public class GetBookQuery : IRequest<BookWithRentalVm?>
 
 public class GetBookQueryHandler : IRequestHandler<GetBookQuery, BookWithRentalVm?>
 {
-    private readonly IApplicationContext _applicationContext;
+    private readonly IApplicationDbContext _applicationDbContext;
     private readonly ILogger _logger;
     private readonly IMapper _mapper;
     
-    public GetBookQueryHandler(IApplicationContext applicationContext, ILogger logger, IMapper mapper)
+    public GetBookQueryHandler(IApplicationDbContext applicationDbContext, ILogger logger, IMapper mapper)
     {
-        _applicationContext = applicationContext;
+        _applicationDbContext = applicationDbContext;
         _logger = logger;
         _mapper = mapper;
     }
     
     public async Task<BookWithRentalVm?> Handle(GetBookQuery request, CancellationToken cancellationToken)
     {
-        var book = await _applicationContext.Books
+        var book = await _applicationDbContext.Books
             .AsNoTracking()
             .FirstOrDefaultAsync(book => book.Id == request.BookId, cancellationToken: cancellationToken);
 
@@ -37,7 +37,7 @@ public class GetBookQueryHandler : IRequestHandler<GetBookQuery, BookWithRentalV
             return null;
         }
 
-        var rentals = await _applicationContext.Rentals.Where(rental => rental.BookId == book.Id)
+        var rentals = await _applicationDbContext.Rentals.Where(rental => rental.BookId == book.Id)
             .ProjectTo<BriefRentalDto>(_mapper.ConfigurationProvider).ToListAsync(cancellationToken: cancellationToken);
         
         _logger.Debug("Found book {} with active rentals {@Rentals}", book, rentals.Where(dto => dto.Active));
