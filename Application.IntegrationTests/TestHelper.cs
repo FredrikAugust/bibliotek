@@ -6,8 +6,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Moq;
-using Respawn;
-using Respawn.Graph;
 using Serilog;
 
 namespace Application.IntegrationTests;

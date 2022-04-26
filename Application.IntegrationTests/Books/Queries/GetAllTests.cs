@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -20,21 +21,23 @@ public class GetAllTests : TestsWithHelper
 
         result.Should().NotBeNull();
     }
-    
+
     [Fact]
     public async Task GetAllTests_ShouldReturnAll()
     {
-
+        var book1Name = Guid.NewGuid().ToString();
+        var book2Name = Guid.NewGuid().ToString();
+        
         ApplicationDbContext.Books.AddRange(new List<Book>
         {
             new()
             {
-                Name = "Superbook 42",
+                Name = book1Name,
                 Isbn = new Isbn("test"),
             },
             new()
             {
-                Name = "My cool cats",
+                Name = book2Name,
                 Isbn = new Isbn("ok")
             }
         });
@@ -43,6 +46,6 @@ public class GetAllTests : TestsWithHelper
 
         var result = await Mediator.Send(new GetAllBooksQuery());
 
-        result.Books.Count().Should().Be(2);
+        result.Books.Should().Contain(dto => dto.Name == book1Name).And.Contain(dto => dto.Name == book2Name);
     }
 }
